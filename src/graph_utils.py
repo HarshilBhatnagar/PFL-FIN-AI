@@ -198,35 +198,106 @@ class GraphGenerator:
             logger.error(f"Error extracting table from context: {str(e)}")
             return pd.DataFrame()
 
-    def generate_graph(self, query: str, context: List[str], context_docs=None) -> Dict[str, Any]:
-        """Generate a graph dynamically from the most relevant table and row found in context. Fallback to all table chunks if needed."""
+    def generate_graph(self, query: str, context: List[str], context_docs=None, separated_data=None) -> Dict[str, Any]:
+        """Generate a graph dynamically from numerical data and tables."""
         try:
             logger.info(f"Generating graph for query: {query}")
             main_phrase = extract_main_metric_phrase(query)
-            df = self._extract_data_from_context(context, query)
-            if df.empty and context_docs:
-                logger.info("No relevant table in top-k context, searching all table chunks in document.")
-                all_table_chunks = self.get_all_table_chunks_from_docs(context_docs)
-                df = self._extract_data_from_context(all_table_chunks, query)
-            if df.empty:
-                return {"error": "No relevant table data found in context for graphing.", "graph_data": None, "embed_code": None}
+            
+            # Process numerical data first
+            numerical_data = separated_data.get("numerical_data", []) if separated_data else []
+            tables = separated_data.get("tables", []) if separated_data else []
+            
+            # Combine numerical data into a DataFrame
+            numerical_df = None
+            if numerical_data:
+                numerical_rows = []
+                for data in numerical_data:
+                    text = data["text"]
+                    numbers = data["numbers"]
+                    # Try to extract labels from the text
+                    labels = re.findall(r'[A-Za-z]+(?:\s+[A-Za-z]+)*', text)
+                    if labels and len(labels) == len(numbers):
+                        for label, number in zip(labels, numbers):
+                            numerical_rows.append({
+                                "metric": label.strip(),
+                                "value": float(number)
+                            })
+                if numerical_rows:
+                    numerical_df = pd.DataFrame(numerical_rows)
+                    logger.info(f"Created numerical DataFrame with {len(numerical_rows)} rows")
+            
+            # Process tables
+            best_table_df = None
+            best_score = -1
+            
+            if tables:
+                for table_data in tables:
+                    df = table_data["dataframe"]
+                    score = score_table_for_query(df, query, main_phrase)
+                    logger.info(f"Table columns: {df.columns.tolist()} | Score: {score}")
+                    if score > best_score:
+                        best_score = score
+                        best_table_df = df
+            
+            # Decide which data to use
+            if best_table_df is not None and (numerical_df is None or best_score > 0.7):
+                logger.info("Using table data for graph generation")
+                df = best_table_df
+            elif numerical_df is not None:
+                logger.info("Using numerical data for graph generation")
+                df = numerical_df
+            else:
+                # Fallback to original extraction method
+                logger.info("No suitable data found, using original extraction method")
+                df = self._extract_data_from_context(context, query)
+                if df.empty and context_docs:
+                    logger.info("No relevant table in top-k context, searching all table chunks in document.")
+                    all_table_chunks = self.get_all_table_chunks_from_docs(context_docs)
+                    df = self._extract_data_from_context(all_table_chunks, query)
+            
+            if df is None or df.empty:
+                return {"error": "No relevant data found for graphing.", "graph_data": None, "embed_code": None}
 
-            # Stage 2: Select the best-matching row for the metric/label
-            filtered_df = select_best_row(df, main_phrase)
-            if filtered_df.empty:
-                return {"error": "No relevant row found for graphing.", "graph_data": None, "embed_code": None}
+            # Select relevant data for plotting
+            if "metric" in df.columns and "value" in df.columns:
+                # Numerical data format
+                x_col = "metric"
+                y_cols = ["value"]
+            else:
+                # Table format
+                filtered_df = select_best_row(df, main_phrase)
+                if filtered_df.empty:
+                    return {"error": "No relevant row found for graphing.", "graph_data": None, "embed_code": None}
+                x_col, y_cols = select_relevant_data(filtered_df, query)
+                df = filtered_df
 
-            x_col, y_cols = select_relevant_data(filtered_df, query)
             if not y_cols:
                 return {"error": "No relevant columns found for graphing.", "graph_data": None, "embed_code": None}
 
             logger.info(f"Plotting x_col: {x_col}, y_cols: {y_cols}")
             fig = go.Figure()
-            for y_col in y_cols:
-                fig.add_trace(go.Bar(x=filtered_df[x_col], y=pd.to_numeric(filtered_df[y_col], errors='coerce'), name=y_col))
+            
+            # Determine the best chart type based on the data
+            if len(y_cols) > 1:
+                # Multiple metrics - use bar chart
+                for y_col in y_cols:
+                    fig.add_trace(go.Bar(
+                        x=df[x_col],
+                        y=pd.to_numeric(df[y_col], errors='coerce'),
+                        name=y_col
+                    ))
+            else:
+                # Single metric - use line chart for trends
+                fig.add_trace(go.Scatter(
+                    x=df[x_col],
+                    y=pd.to_numeric(df[y_cols[0]], errors='coerce'),
+                    mode='lines+markers',
+                    name=y_cols[0]
+                ))
 
             fig.update_layout(
-                title=f"{query.title()} (from table)",
+                title=f"{query.title()} (from {'numerical data' if numerical_df is not None else 'table data'})",
                 xaxis_title=x_col,
                 yaxis_title=", ".join(y_cols),
                 template='plotly_white',
@@ -239,7 +310,7 @@ class GraphGenerator:
             logger.info(f"Graph generated and saved successfully at {filepath}")
             graph_json = json.loads(fig.to_json())
             return {
-                "graph_type": "bar",
+                "graph_type": "bar" if len(y_cols) > 1 else "line",
                 "graph_data": graph_json,
                 "embed_code": embed_code,
                 "filepath": filepath
