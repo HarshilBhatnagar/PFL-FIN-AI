@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NBFC Financial Analysis</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .query-section, .response-section {
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .chart-container {
+            margin-top: 20px;
+            height: 400px;
+        }
+        textarea {
+            width: 100%;
+            height: 100px;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>NBFC Financial Analysis</h1>
+    
+    <div class="container">
+        <div class="query-section">
+            <h2>Ask a Question</h2>
+            <textarea id="query" placeholder="Enter your question about NBFC financials..."></textarea>
+            <button onclick="submitQuery()">Submit</button>
+        </div>
+        
+        <div class="response-section">
+            <h2>Response</h2>
+            <div id="response"></div>
+            <div class="chart-container">
+                <canvas id="financialChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let chart = null;
+
+        async function submitQuery() {
+            const query = document.getElementById('query').value;
+            const responseDiv = document.getElementById('response');
+            
+            try {
+                const response = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ query: query })
+                });
+                
+                const data = await response.json();
+                
+                // Display text response
+                responseDiv.innerHTML = `<p>${data.response}</p>`;
+                
+                // If there's graph data, update the chart
+                if (data.graph_data) {
+                    updateChart(data.graph_data);
+                }
+                
+            } catch (error) {
+                responseDiv.innerHTML = `<p style="color: red;">Error: ${error.message}</p>`;
+            }
+        }
+
+        function updateChart(graphData) {
+            const ctx = document.getElementById('financialChart').getContext('2d');
+            
+            // Destroy existing chart if it exists
+            if (chart) {
+                chart.destroy();
+            }
+            
+            // Create new chart
+            chart = new Chart(ctx, {
+                type: graphData.type || 'bar',
+                data: {
+                    labels: graphData.labels,
+                    datasets: [{
+                        label: graphData.title,
+                        data: graphData.data,
+                        backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html> 
