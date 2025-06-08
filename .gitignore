@@ -31,42 +31,26 @@ ENV/
 *.swp
 *.swo
 
-# Logs
-*.log
-logs/
-log/
-
-# Cache
-.cache/
-.pytest_cache/
-.coverage
-htmlcov/
-
-# Data and Models
+# Project specific
 data/
-models/
-*.db
-*.sqlite3
-*.index
-*.faiss
-*.pkl
-*.bin
-
-# Generated files
 graphs/
-txtfiles/
+*.log
+api.log
+agents.log
+rag_engine.log
+graph_utils.log
 
 # Environment variables
 .env
 .env.local
-.env.*.local
 
-# OS specific
-.DS_Store
-Thumbs.db
+# Database
+*.db
+*.sqlite3
+chroma_db/
 
-# Project specific
-*.pdf
-*.docx
-*.xlsx
-*.csv
+# Model files
+*.bin
+*.pt
+*.pth
+*.onnx

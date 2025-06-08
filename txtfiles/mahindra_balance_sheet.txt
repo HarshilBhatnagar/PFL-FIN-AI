@@ -1,0 +1,93 @@
+Mahindra & Mahindra Financial Services Limited  
+Audited Standalone & Consolidated Financial Results (Year Ended 31 March 2024)  
+
+================================================================================  
+STANDALONE RESULTS (₹ Crore)  
+--------------------------------------------------------------------------------  
+| Particulars                 | Q2 2024 (Unaudited) | Q1 2024 (Unaudited) | Q2 2023 (Unaudited) | FY 2024 (Audited) |  
+|-----------------------------|---------------------|---------------------|---------------------|-------------------|  
+| Revenue from Operations     | 3,722.21            | 3,654.01            | 3,084.56            | 13,404.14         |  
+| Total Income                | 3,760.15            | 3,706.10            | 3,125.41            | 13,552.42         |  
+| Total Expenses              | 3,073.77            | 2,874.86            | 2,681.87            | 11,355.47         |  
+| Profit Before Tax (PBT)     | 686.38              | 831.84              | 473.64              | 2,356.47          |  
+| Profit After Tax (PAT)      | 500.30              | 647.53              | 305.31              | 1,673.61          |  
+| EPS (₹) - Basic             | 4.16                | 5.01                | 2.86                | 14.26             |  
+| EPS (₹) - Diluted           | 4.15                | 5.00                | 2.85                | 14.25             |  
+
+================================================================================  
+KEY RATIOS (Standalone)  
+--------------------------------------------------------------------------------  
+| Ratio                       | Q2 2024  | Q1 2024  | Q2 2023  | FY 2024  |  
+|-----------------------------|----------|----------|----------|----------|  
+| Debt-Equity Ratio           | 5.10     | 5.08     | 4.52     | 5.08     |  
+| Net Profit Margin (%)       | 13.64%   | 16.70%   | 11.28%   | 12.97%   |  
+| Capital Adequacy Ratio (%)  | 18.50%   | 18.84%   | 21.16%   | 18.88%   |  
+| Gross Stage-3 Assets (%)    | 3.59%    | 3.40%    | 4.35%    | 3.40%    |  
+
+================================================================================  
+CONSOLIDATED RESULTS (Audited FY 2024)  
+--------------------------------------------------------------------------------  
+| Total Income                | 15,970.32         |  
+| Profit Before Tax (PBT)     | 2,588.18          |  
+| Profit After Tax (PAT)      | 1,943.05          |  
+| EPS (₹) - Basic             | 15.66             |  
+| Net Profit Margin (%)       | 12.17%            |  
+
+================================================================================  
+Notes:  
+1. All figures are in ₹ Crore unless specified.  
+2. Standalone results exclude subsidiaries; consolidated results include subsidiaries and joint ventures.  
+3. Source: SEBI Lodgment Document (23 July 2024).  
+
+1. Income Statement (Standalone)
+
+(₹ Crore, unless specified)
+
+Particulars	Q2 2024	Q1 2024	QoQ Δ	Q2 2023	YoY Δ	FY 2024 (Audited)
+Revenue from Operations	3,722.21	3,654.01	+1.87%	3,084.56	+20.68%	13,404.14
+- Interest Income	3,812.18	3,547.11	+7.47%	3,034.89	+25.61%	13,108.76
+- Fees & Commission	75.50	78.58	-3.92%	23.54	+220.73%	174.87
+Other Income	37.94	52.09	-27.16%	40.85	-7.12%	158.28
+Total Income	3,760.15	3,706.10	+1.46%	3,125.41	+20.31%	13,552.42
+Expenses						
+- Finance Costs	1,828.58	1,735.06	+5.39%	1,450.45	+26.07%	6,605.88
+- Impairment on Loans	448.16	341.47	+31.24%	528.41	-15.19%	1,712.83
+- Employee Benefits	470.34	424.31	+10.85%	417.39	+12.69%	1,758.62
+Total Expenses	3,073.77	2,874.86	+6.92%	2,681.87	+14.61%	11,355.47
+Profit Before Tax (PBT)	686.38	831.84	-17.49%	473.64	+44.92%	2,356.47
+Tax Expense	186.08	184.31	+0.96%	168.33	+10.54%	682.86
+Profit After Tax (PAT)	500.30	647.53	-22.73%	305.31	+63.86%	1,673.61
+EPS (₹) - Basic	4.16	5.01	-16.96%	2.86	+45.45%	14.26
+2. Balance Sheet (Standalone)
+
+(As of 30 June 2024 vs 31 March 2024, ₹ Crore)
+
+Particulars	30 Jun 2024	31 Mar 2024	Δ (QoQ)
+Assets			
+- Loans & Advances	1,18,655.30	1,18,167.49	+0.41%
+- Investments	3,532.95	3,531.95	+0.03%
+- Cash & Bank Balances	512.89	618.99	-17.14%
+Total Assets	1,22,700.14	1,22,318.43	+0.31%
+Liabilities			
+- Borrowings	95,210.00	94,850.00	+0.38%
+- Deposits	5,432.18	5,420.11	+0.22%
+- Provisions	448.16	341.47	+31.24%
+Total Liabilities	1,01,090.34	1,00,611.58	+0.48%
+Net Worth	21,609.80	21,706.85	-0.45%
+3. Key Financial Ratios
+
+Ratio	Q2 2024	Q1 2024	Q2 2023	FY 2024
+Profitability				
+- Net Profit Margin (%)	13.64%	16.70%	11.28%	12.97%
+- Return on Assets (RoA, %)	1.63%	2.12%	1.18%	1.38%
+Leverage				
+- Debt-to-Equity	5.10	5.08	4.52	5.08
+- Total Debt/Total Assets (%)	80.25%	80.05%	78.95%	80.05%
+Asset Quality				
+- Gross NPA (%)	3.59%	3.40%	4.35%	3.40%
+- Provision Coverage Ratio (%)	59.80%	63.16%	60.13%	63.16%
+4. YoY and QoQ Growth Analysis
+
+Interest Income: +25.61% YoY (Q2 2024 vs Q2 2023) due to loan book expansion.
+PAT: +63.86% YoY but -22.73% QoQ due to higher impairments in Q2 2024.
+Gross NPA: Improved to 3.59% (Q2 2024) vs 4.35% (Q2 2023).

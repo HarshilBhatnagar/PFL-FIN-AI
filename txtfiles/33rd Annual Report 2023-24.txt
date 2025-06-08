@@ -1,0 +1,55 @@
+33rd Annual Report 2023-24
+Hero FinCorp
+
+Particulars
+
+| Particulars | For the year ended March 31, 2024 | For the year ended March 31, 2023 |
+
+⸻
+
+B Cash flow from investing activities
+Purchase of property, plant and equipment and intangible assets | (125.60) | (35.89)
+Proceeds from sale of property, plant and equipment | 3.48 | 2.29
+Dividend received | 0.71 | 0.74
+Interest received on investments | 110.00 | 48.94
+Purchase of investments | (12,678.29) | (14,638.30)
+Sale of investments | 12,593.11 | 14,200.48
+Investment in subsidiary | - | (300.00)
+
+Net cash used in investing activities (B) | (96.59) | (721.74)
+
+⸻
+
+C Cash flow from financing activities
+Proceeds from conversion of partly paid equity shares to fully paid | 0.02 | -
+Proceeds from issue of compulsorily convertible preference shares | - | 2,000.00
+Proceeds from issue of debt securities | 5,136.50 | 4,963.52
+Repayment of debt securities | (5,325.00) | (4,495.00)
+Proceeds from issue of borrowings (other than debt securities) | 21,892.37 | 17,705.72
+Repayment of borrowings (other than debt securities) | (14,071.85) | (13,930.66)
+Proceeds from issue of subordinated liabilities | 55.00 | 255.00
+Repayment of lease liability | (29.60) | (12.38)
+Dividend paid on equity shares | (102.94) | -
+Dividend paid on compulsorily convertible preference shares | (47.51) | -
+Share issue expenses paid | - | (6.00)
+
+Net cash generated from financing activities (C) | 7,506.99 | 6,480.20
+
+⸻
+
+D Net decrease in cash and cash equivalents (A+B+C) | (602.28) | (143.41)
+Cash and cash equivalents at the beginning of the year | 630.62 | 774.03
+
+Cash and cash equivalents at the end of the year* | 28.34 | 630.62
+
+⸻
+
+Components of cash and cash equivalents
+Balances with banks (current accounts) | 28.34 | 218.56
+Deposit with banks (original maturity less than three months) | - | 412.06
+
+Total | 28.34 | 630.62
+
+⸻
+
+Standalone Financial Statements – Page 162
