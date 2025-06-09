@@ -1,0 +1,147 @@
+Axis Finance Limited - Detailed Metric and Text Summary for Q4 and FY2025
+Extracted from Q4 Financials and Auditors' Report (March 31, 2025)
+
+1. Financial Performance Metrics
+Income Statement (Q4 FY2025 and Full Year FY2025):
+- Q4 FY2025 (Jan-Mar 2025):
+  - Total Income: ₹1,08,669.59 lakhs
+    - Interest Income: ₹1,04,431.47 lakhs (96.1% of total income)
+    - Fees and Commission Income: ₹3,250.92 lakhs
+    - Other Operating Income: ₹655.20 lakhs
+    - Net Gain on Fair Value Changes: ₹80.31 lakhs
+    - Net Gain on Derecognition of Financial Instruments: ₹172.67 lakhs
+    - Other Income: ₹79.02 lakhs
+  - Total Expenses: ₹87,394.09 lakhs
+    - Finance Costs: ₹62,051.33 lakhs (71% of total expenses)
+    - Impairment on Financial Instruments: ₹12,215.21 lakhs
+    - Employee Benefits Expenses: ₹6,955.16 lakhs
+    - Depreciation and Amortization: ₹477.72 lakhs
+    - Other Expenses: ₹4,166.84 lakhs
+  - Profit Before Tax: ₹21,275.50 lakhs
+  - Tax Expenses: ₹5,407.02 lakhs (Current Tax: ₹6,505.18 lakhs, Deferred Tax: ₹-1,098.16 lakhs)
+  - Net Profit: ₹15,868.48 lakhs
+  - Other Comprehensive Income (Loss): ₹-1,828.91 lakhs
+    - Re-measurements of Net Defined Benefit Plans: ₹-49.39 lakhs (net of tax)
+    - Fair Value Changes on Cash Flow Hedge: ₹-1,779.52 lakhs (net of tax)
+  - Total Comprehensive Income: ₹14,039.57 lakhs
+  - Earnings Per Share (not annualized): Basic & Diluted: ₹2.29
+- Full Year FY2025:
+  - Total Income: ₹4,10,063.51 lakhs
+    - Interest Income: ₹3,92,913.35 lakhs
+    - Fees and Commission Income: ₹10,117.44 lakhs
+  - Total Expenses: ₹3,22,343.97 lakhs
+    - Finance Costs: ₹1,82,973.07 lakhs
+    - Impairment on Financial Instruments: ₹32,315.27 lakhs
+  - Profit Before Tax: ₹87,719.55 lakhs
+  - Net Profit: ₹65,247.34 lakhs
+  - Total Comprehensive Income: ₹63,689.77 lakhs
+  - Earnings Per Share: Basic & Diluted: ₹10.03
+
+Cash Flow Statement (FY2025):
+- Net Cash Flow from Operating Activities: ₹-6,48,018.95 lakhs
+  - Loans Disbursed (Increase in Loans): ₹-6,71,955.61 lakhs
+  - Interest Received: ₹4,02,875.30 lakhs
+  - Interest Paid: ₹2,35,800.31 lakhs
+- Net Cash Flow from Investing Activities: ₹15,243.13 lakhs
+  - Purchase of Investments (FVTPL): ₹-8,03,643.76 lakhs
+  - Sale of Investments (FVTPL): ₹8,06,968.99 lakhs
+- Net Cash Flow from Financing Activities: ₹6,52,197.60 lakhs
+  - Proceeds from Debt Securities: ₹8,25,173.57 lakhs
+  - Repayment of Debt Securities: ₹-7,68,000.00 lakhs
+  - Proceeds from Equity Shares (Rights Issue): ₹59,853.02 lakhs
+- Net Increase in Cash and Cash Equivalents: ₹19,421.78 lakhs
+  - Closing Cash and Cash Equivalents: ₹80,125.41 lakhs
+    - Cash: ₹28,155.27 lakhs
+    - Highly Liquid Securities: ₹51,970.14 lakhs
+
+Loan Transfers (FY2025):
+- Loans Sold (Not in Default):
+  - Total Loans Sold: 702
+  - Aggregate Amount: ₹66,968.79 lakhs
+    - To Banks: ₹40,449.57 lakhs (407 loans)
+    - To Others: ₹26,519.22 lakhs (295 loans)
+  - Number of Transactions: 13
+  - Weighted Average Maturity (Remaining): 128.45 months
+  - Retention of Beneficial Economic Interest: 30% (average)
+  - Tangible Security Coverage: 100% to 200%
+  - Rating Distribution: A, A-, B+, BBB, BBB+
+- Loans Acquired (Not in Default):
+  - Total Loans Acquired: 5,872
+  - Aggregate Amount: ₹21,728.30 lakhs
+  - Number of Transactions: 6
+  - Weighted Average Maturity (Remaining): 87.37 months
+  - Retention of Beneficial Economic Interest: 10%
+  - Tangible Security Coverage: 100%
+
+Resolution Plans (Half Year Ended March 31, 2025):
+- Standard Accounts under Resolution:
+  - Personal Loans: ₹279.22 lakhs (from ₹274.99 lakhs)
+  - Corporate Persons (Others): ₹619.36 lakhs (from ₹658.49 lakhs)
+  - Total Exposure: ₹898.58 lakhs
+  - Amount Paid by Borrowers: ₹43.83 lakhs
+  - No Slippages to NPA or Write-offs
+
+Non-Convertible Debentures (NCDs):
+- Unsecured NCDs Outstanding (March 31, 2025): ₹31,100 crore
+  - ISINs: INE891K08034 to INE891K08216 (18 series)
+- Funds Raised in Q4 FY2025:
+  - INE891K08216: ₹50 crore (Dec 27, 2024)
+  - INE891K08208 (Re-issuance): Amount not specified (Jan 16, 2025)
+  - INE891K07AE2: Amount not specified (Mar 27, 2025)
+- Total Fund Raising Approved: Up to ₹36,000 crore (private placement)
+
+2. Audit Findings
+Auditors' Opinion:
+- Unmodified opinion by B. K. Khare & Co. and G. M. Kapadia & Co.
+- Financial results comply with Ind AS 34, Companies Act, 2013, RBI guidelines, and SEBI Listing Regulations
+- True and fair view of net profit, other comprehensive income, and financial information for Q4 and FY2025
+- Audit conducted per Standards on Auditing (SA) under Section 143(10) of Companies Act
+
+Auditors’ Responsibilities:
+- Assessed risks of material misstatement (fraud or error)
+- Evaluated internal financial controls’ effectiveness
+- Verified appropriateness of accounting policies and estimates
+- Confirmed going concern basis (no material uncertainty)
+- Ensured fair presentation and adequate disclosures
+
+Other Matters:
+- FY2024 results audited by Singhi & Co. and B. K. Khare & Co. (unmodified opinion, April 18, 2024)
+- Q4 FY2025 results derived as balancing figures from full-year audited figures and Q1-Q3 audited figures
+
+3. Regulatory and Compliance Disclosures
+Board Meeting (April 17, 2025):
+- Approved audited financial results for Q4 and FY2025
+- Approved fund raising via NCDs/bonds up to ₹36,000 crore
+- Meeting Duration: 2:15 p.m. to 7:45 p.m.
+
+SEBI Listing Regulations Compliance:
+- Regulation 52(4): Financial results, cash flow, and asset-liability statements submitted
+- Regulation 52(7): Proceeds from NCDs utilized as per Key Information Document
+- Regulation 52(7A): No deviation in use of NCD proceeds
+- Regulation 54: Security Cover Certificate provided
+- Regulation 23: Related Party Transactions disclosed for half-year ended March 31, 2025
+- Regulation 52(8): Results to be published in one English national daily newspaper
+
+RBI Compliance:
+- Impairment allowances under Ind AS 109 exceed IRACP norms; no impairment reserve required
+- No transfers of NPAs or SMAs
+- No acquisition of stressed loans
+- Compliance with RBI circulars on loan transfers and resolution plans
+
+Other Disclosures:
+- Single operating segment (financing) per Ind AS 108
+- Equity shares issued via rights issue: 6,65,06,764 shares of ₹10 each (details truncated)
+- Compliance with covenants/terms of listed debt securities confirmed
+- No crypto/virtual currency transactions
+- No benami property proceedings
+- No willful defaulter declaration
+
+4. Related Party Transactions
+- Disclosed for half-year ended March 31, 2025 per Regulation 23
+- Details not fully provided in document; submitted as Annexure-5
+
+Auditors:
+- B. K. Khare & Co. (FRN: 105102W), Shirish Rahalkar (M.No: 111212)
+- G. M. Kapadia & Co. (FRN: 104767W), Rajen Ashar (M.No: 048243)
+- Date: April 17, 2025
+- Place: Mumbai

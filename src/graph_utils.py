@@ -10,6 +10,7 @@ import re
 import base64
 from io import BytesIO
 import difflib
+from plotly.subplots import make_subplots
 
 # Configure logging
 logging.basicConfig(
@@ -22,103 +23,134 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-def parse_ascii_table(table_str: str) -> pd.DataFrame:
-    """Parse an ASCII table (with | separators) into a pandas DataFrame."""
-    lines = [line for line in table_str.split('\n') if '|' in line]
-    if not lines:
+def parse_ascii_table(table_text: str) -> pd.DataFrame:
+    """Parse an ASCII table into a pandas DataFrame."""
+    try:
+        # Split into lines and remove empty lines
+        lines = [line.strip() for line in table_text.split('\n') if line.strip()]
+        
+        # Find the separator line (contains | and -)
+        separator_idx = next(i for i, line in enumerate(lines) if '|' in line and '-' in line)
+        
+        # Get headers
+        headers = [h.strip() for h in lines[separator_idx-1].split('|') if h.strip()]
+        
+        # Get data rows
+        data_rows = []
+        for line in lines[separator_idx+1:]:
+            if '|' in line:
+                row = [cell.strip() for cell in line.split('|') if cell.strip()]
+                if len(row) == len(headers):
+                    data_rows.append(row)
+        
+        # Create DataFrame
+        df = pd.DataFrame(data_rows, columns=headers)
+        
+        # Convert numeric columns
+        for col in df.columns:
+            df[col] = pd.to_numeric(df[col].str.replace(',', ''), errors='ignore')
+        
+        return df
+    except Exception as e:
+        logger.error(f"Error parsing ASCII table: {str(e)}")
         return pd.DataFrame()
-    # Remove border/separator lines
-    lines = [line for line in lines if not re.match(r'^[|\-\s]+$', line)]
-    # Find the header row (the one with the most columns)
-    split_rows = [line.split('|')[1:-1] for line in lines]
-    header_idx = max(range(len(split_rows)), key=lambda i: len(split_rows[i]))
-    header = [cell.strip() for cell in split_rows[header_idx]]
-    # Collect data rows that match header length
-    data = []
-    for i, row in enumerate(split_rows):
-        if i == header_idx:
-            continue
-        if len(row) == len(header):
-            data.append([cell.strip() for cell in row])
-    if not data:
-        return pd.DataFrame()
-    df = pd.DataFrame(data, columns=header)
-    return df
 
-def select_relevant_data(df: pd.DataFrame, query: str):
-    """Select relevant columns based on the query."""
-    query_lower = query.lower()
-    # If years are in columns, use them as y, and the first column as x
-    year_cols = [col for col in df.columns if re.search(r'20\d{2}', col)]
-    if year_cols:
-        x_col = df.columns[0]
-        y_cols = year_cols
-        return x_col, y_cols
-    # Otherwise, try to find columns matching the query
-    y_cols = [col for col in df.columns if any(word in col.lower() for word in query_lower.split())]
-    if y_cols:
-        x_col = df.columns[0]
-        return x_col, y_cols
-    # Fallback: all numeric columns except the first
-    numeric_cols = []
-    for col in df.columns[1:]:
-        try:
-            df[col] = df[col].str.replace(',', '').astype(float)
-            numeric_cols.append(col)
-        except Exception:
-            continue
-    if numeric_cols:
-        return df.columns[0], numeric_cols
-    return df.columns[0], []
+def select_relevant_data(df: pd.DataFrame, query: str) -> Tuple[str, List[str]]:
+    """Select relevant columns for plotting."""
+    try:
+        # Find year/date column
+        date_cols = [col for col in df.columns if any(year in col.lower() for year in ['2024', '2025'])]
+        if date_cols:
+            x_col = date_cols[0]
+        else:
+            x_col = df.columns[0]
+            
+        # Find value columns
+        value_cols = []
+        for col in df.columns:
+            if col != x_col and pd.api.types.is_numeric_dtype(df[col]):
+                value_cols.append(col)
+                
+        return x_col, value_cols
+    except Exception as e:
+        logger.error(f"Error selecting relevant data: {str(e)}")
+        return df.columns[0], []
 
-def score_table_for_query(df: pd.DataFrame, query: str, main_phrase: str) -> int:
-    """Score a table for relevance to the query, prioritizing exact phrase and header matches."""
-    score = 0
-    # Score exact phrase in headers
-    for col in df.columns:
-        if main_phrase in col.lower():
-            score += 20
-    # Score exact phrase in rows
-    for _, row in df.iterrows():
-        for cell in row:
-            if main_phrase in str(cell).lower():
-                score += 10
-    return score
+def score_table_for_query(df: pd.DataFrame, query: str, main_phrase: str) -> float:
+    """Score how well a table matches the query."""
+    try:
+        score = 0.0
+        
+        # Check column names
+        for col in df.columns:
+            col_lower = col.lower()
+            # Exact match
+            if main_phrase in col_lower:
+                score += 1.0
+            # Partial match
+            elif any(word in col_lower for word in main_phrase.split()):
+                score += 0.5
+            # Check for year/date columns
+            if any(year in col_lower for year in ['2024', '2025']):
+                score += 0.3
+                
+        # Check for numerical data
+        if df.select_dtypes(include=['float64', 'int64']).shape[1] > 0:
+            score += 0.5
+            
+        return score
+    except Exception as e:
+        logger.error(f"Error scoring table: {str(e)}")
+        return 0.0
 
 def extract_main_metric_phrase(query: str) -> str:
-    # Try to extract a known metric phrase from the query
-    known_metrics = [
-        "fees and commission income", "total income", "total assets", "revenue from operations",
-        "interest income", "profit before tax", "net profit", "operating expenses", "total liabilities"
+    """Extract the main metric phrase from the query."""
+    # Common financial metrics
+    metrics = [
+        "revenue", "income", "profit", "expense", "cost", "margin",
+        "ratio", "growth", "trend", "fees", "commission", "interest"
     ]
+    
+    # Find the first metric mentioned in the query
     query_lower = query.lower()
-    for metric in known_metrics:
+    for metric in metrics:
         if metric in query_lower:
             return metric
-    # Fallback: extract the longest noun phrase or quoted phrase
-    quoted = re.findall(r'"([^"]+)"|\'([^\']+)\'', query)
-    if quoted:
-        return quoted[0][0] or quoted[0][1]
-    # Otherwise, use the longest sequence of non-stopwords
-    stopwords = set(['the', 'for', 'and', 'of', 'in', 'to', 'as', 'on', 'at', 'by', 'with', 'from', 'a', 'an', 'is', 'was', 'were', 'are', 'be', 'this', 'that', 'these', 'those', 'it', 'its'])
-    words = [w for w in query_lower.split() if w not in stopwords]
-    return ' '.join(words)
+    return ""
 
 def select_best_row(df: pd.DataFrame, main_phrase: str) -> pd.DataFrame:
-    first_col = df.columns[0]
-    # Normalize row labels
-    candidates = df[first_col].astype(str).str.lower().str.replace('&', 'and').str.replace(r'\s+', ' ', regex=True).str.strip().tolist()
-    logger.info(f'Parsed DataFrame for matching:\n{df}')
-    logger.info(f'Row candidates for matching: {candidates}')
-    # Normalize the metric phrase
-    norm_phrase = main_phrase.lower().replace('&', 'and').replace('  ', ' ').strip()
-    matches = difflib.get_close_matches(norm_phrase, candidates, n=1, cutoff=0.5)
-    if matches:
-        idx = candidates.index(matches[0])
-        logger.info(f'Fuzzy matched row: {matches[0]} (index {idx}) for metric: {main_phrase}')
-        return df.iloc[[idx]]
-    logger.info('No fuzzy match found for metric, returning full table.')
-    return df
+    """Select the best row from the DataFrame based on the query."""
+    try:
+        if df.empty:
+            return df
+            
+        # If we have a metric column, filter by it
+        if 'metric' in df.columns:
+            return df[df['metric'].str.contains(main_phrase, case=False, na=False)]
+            
+        # Otherwise, try to find the best row
+        best_score = -1
+        best_row = None
+        
+        for idx, row in df.iterrows():
+            score = 0
+            for val in row:
+                if isinstance(val, str):
+                    if main_phrase in val.lower():
+                        score += 1
+                    elif any(word in val.lower() for word in main_phrase.split()):
+                        score += 0.5
+            if score > best_score:
+                best_score = score
+                best_row = row
+                
+        if best_row is not None:
+            return pd.DataFrame([best_row], columns=df.columns)
+            
+        return df
+    except Exception as e:
+        logger.error(f"Error selecting best row: {str(e)}")
+        return df
 
 class GraphGenerator:
     def __init__(self):
@@ -135,31 +167,22 @@ class GraphGenerator:
             
             logger.info(f"Attempting to save graph to: {filepath}")
             
-            # Convert figure to PNG bytes
-            img_bytes = fig.to_image(format="png")
+            # Save as HTML first
+            html_path = filepath.replace('.png', '.html')
+            fig.write_html(html_path)
             
-            # Save the bytes to file
-            with open(filepath, 'wb') as f:
-                f.write(img_bytes)
+            # Convert to PNG
+            fig.write_image(filepath)
             
             logger.info(f"Graph saved successfully at {filepath}")
             
-            # Generate base64 encoded image for embed code
-            img_base64 = base64.b64encode(img_bytes).decode('utf-8')
-            embed_code = f'<img src="data:image/png;base64,{img_base64}" alt="{graph_type} graph">'
+            # Generate embed code
+            embed_code = f'<iframe src="/graphs/{filename}" width="800" height="500" frameborder="0"></iframe>'
             
             return filepath, embed_code
         except Exception as e:
             logger.error(f"Error saving graph: {str(e)}")
-            # If saving fails, try to return just the base64 image
-            try:
-                img_bytes = fig.to_image(format="png")
-                img_base64 = base64.b64encode(img_bytes).decode('utf-8')
-                embed_code = f'<img src="data:image/png;base64,{img_base64}" alt="{graph_type} graph">'
-                return None, embed_code
-            except Exception as e2:
-                logger.error(f"Error generating base64 image: {str(e2)}")
-                raise
+            raise
 
     def get_all_table_chunks_from_docs(self, context_docs):
         # context_docs: List[Document]

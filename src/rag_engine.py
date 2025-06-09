@@ -22,13 +22,8 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-# Try to import GraphGenerator, but make it optional
-try:
-    from src.graph_utils import GraphGenerator
-    GRAPH_SUPPORT = True
-except ImportError:
-    logger.warning("GraphGenerator not available - graph features will be disabled")
-    GRAPH_SUPPORT = False
+# Import GraphGenerator
+from graph_utils import GraphGenerator
 
 class RAGEngine:
     def __init__(self):
@@ -48,15 +43,118 @@ class RAGEngine:
         self.session_id = datetime.now().strftime("%Y%m%d_%H%M%S")
         logger.info(f"Created new session: {self.session_id}")
         
-        # Initialize graph generator if available
-        if GRAPH_SUPPORT:
+        # Initialize graph generator
+        try:
             self.graph_generator = GraphGenerator()
-        else:
+            logger.info("GraphGenerator initialized successfully")
+        except Exception as e:
+            logger.error(f"Failed to initialize GraphGenerator: {str(e)}")
             self.graph_generator = None
         
         # Load existing documents if any
         count = self.vector_store._collection.count()
         logger.info(f"Vector store contains {count} documents")
+        
+        # Initialize LLM
+        self.llm = self._initialize_llm()
+        
+    def _initialize_llm(self):
+        """Initialize the language model."""
+        try:
+            from langchain_community.llms import Ollama
+            return Ollama(
+                model="llama3.2",
+                temperature=0.5,
+                max_tokens=512,
+                base_url="http://localhost:11434"  # Default Ollama URL
+            )
+        except Exception as e:
+            logger.error(f"Failed to initialize LLM: {str(e)}")
+            return None
+            
+    def _get_relevant_context(self, query: str) -> List[Document]:
+        """Get relevant context for a query."""
+        try:
+            # Search for relevant documents
+            docs = self.vector_store.similarity_search(query, k=5)
+            logger.info(f"Found {len(docs)} relevant documents")
+            return docs
+        except Exception as e:
+            logger.error(f"Error getting context: {str(e)}")
+            return []
+            
+    def _generate_response(self, query: str, context: List[Document]) -> str:
+        """Generate a response using the LLM."""
+        if not self.llm:
+            return "Error: Language model not initialized."
+            
+        try:
+            # Prepare context
+            context_text = "\n".join([doc.page_content for doc in context])
+            
+            # Generate response
+            prompt = f"""Based on the following context, answer the query.
+            If the query asks for a graph or visualization, explain that you'll generate one.
+            
+            Query: {query}
+            
+            Context:
+            {context_text}
+            
+            Answer:"""
+            
+            response = self.llm.invoke(prompt)
+            return response
+        except Exception as e:
+            logger.error(f"Error generating response: {str(e)}")
+            return f"Error generating response: {str(e)}"
+            
+    def process_query(self, query: str) -> Dict[str, Any]:
+        """Process a query and return a response with graph if needed."""
+        try:
+            # Get context
+            context = self._get_relevant_context(query)
+            
+            # Generate response
+            response = self._generate_response(query, context)
+            
+            # Check if graph is needed
+            graph_data = None
+            embed_code = None
+            filepath = None
+            
+            if self.graph_generator and any(word in query.lower() for word in ["graph", "plot", "chart", "visualize", "show"]):
+                try:
+                    graph_result = self.graph_generator.generate_graph(
+                        query=query,
+                        context=[doc.page_content for doc in context],
+                        context_docs=context
+                    )
+                    
+                    if "error" not in graph_result:
+                        graph_data = graph_result.get("graph_data")
+                        embed_code = graph_result.get("embed_code")
+                        filepath = graph_result.get("filepath")
+                        logger.info(f"Graph generated successfully: {filepath}")
+                except Exception as e:
+                    logger.error(f"Error generating graph: {str(e)}")
+            
+            return {
+                "response": response,
+                "context_used": context,
+                "graph_data": graph_data,
+                "embed_code": embed_code,
+                "filepath": filepath
+            }
+        except Exception as e:
+            logger.error(f"Error processing query: {str(e)}")
+            return {
+                "response": f"Error processing query: {str(e)}",
+                "context_used": [],
+                "graph_data": None,
+                "embed_code": None,
+                "filepath": None
+            }
 
     def _initialize_vector_store(self):
         try:
@@ -292,38 +390,6 @@ class RAGEngine:
             logger.error(f"Error processing directory {directory_path}: {str(e)}")
             raise
 
-    def _get_relevant_context(self, query: str, k: int = 5) -> List[Document]:
-        """Get relevant context from the vector store using multiple strategies."""
-        try:
-            # Strategy 1: Standard similarity search
-            docs = self.vector_store.similarity_search(query, k=k)
-            if docs:
-                logger.info(f"Found {len(docs)} documents using standard similarity search")
-                return docs
-            
-            # Strategy 2: Similarity search with scores
-            docs_with_scores = self.vector_store.similarity_search_with_score(query, k=k*2)
-            if docs_with_scores:
-                # Filter by score threshold and sort by score
-                threshold = 0.7
-                filtered_docs = [doc for doc, score in docs_with_scores if score > threshold]
-                if filtered_docs:
-                    logger.info(f"Found {len(filtered_docs)} documents using scored similarity search")
-                    return filtered_docs
-            
-            # Strategy 3: MMR search for diversity
-            mmr_docs = self.vector_store.max_marginal_relevance_search(query, k=k)
-            if mmr_docs:
-                logger.info(f"Found {len(mmr_docs)} documents using MMR search")
-                return mmr_docs
-            
-            logger.warning("No relevant documents found using any search strategy")
-            return []
-            
-        except Exception as e:
-            logger.error(f"Error getting relevant context: {str(e)}")
-            return []
-
     def _call_ollama(self, prompt: str) -> str:
         """Send prompt to Ollama and return the response."""
         try:
@@ -339,46 +405,6 @@ class RAGEngine:
         except Exception as e:
             logger.error(f"Error calling Ollama: {str(e)}")
             return "I apologize, but I encountered an error while generating the response. Please try again."
-
-    def _generate_response(self, query: str, context_docs: List[Document]) -> str:
-        """Generate a response using the context and query."""
-        try:
-            # Construct context with enhanced metadata
-            context = []
-            for doc in context_docs:
-                source = doc.metadata.get('source', 'Unknown')
-                chunk_id = doc.metadata.get('chunk_id', 'N/A')
-                total_chunks = doc.metadata.get('total_chunks', 'N/A')
-                context.append(
-                    f"Source: {Path(source).name}\n"
-                    f"Chunk {chunk_id + 1} of {total_chunks}\n"
-                    f"Content: {doc.page_content}\n"
-                )
-
-            # Create a more conversational, ChatGPT-style prompt
-            prompt = f"""
-You are a helpful, conversational AI assistant with expertise in financial analysis. Answer the user's question in a clear, friendly, and professional tone, similar to ChatGPT. Use the provided context to support your answer. If the answer is in a table, extract the relevant numbers and explain them in plain English. If you can't find the answer, say so politely.
-
-When you cite data, mention the source file name. If there are multiple years or periods, compare them concisely. Use bullet points or short paragraphs for clarity if needed.
-
-Context:
-{chr(10)+'---'+chr(10).join(context)}
-
-User question: {query}
-
-Your answer:"""
-
-            # Generate response
-            response = self._call_ollama(prompt)
-
-            # Add source files to response
-            source_files = {Path(doc.metadata.get('source', 'Unknown')).name for doc in context_docs}
-            response = f"{response}\n\nSource files: {', '.join(source_files)}"
-
-            return response
-        except Exception as e:
-            logger.error(f"Error generating response: {str(e)}")
-            return f"I apologize, but I encountered an error while generating the response: {str(e)}"
 
     def query(self, query: str) -> Dict[str, Any]:
         """Process a query and return a response with metadata."""

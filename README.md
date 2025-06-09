@@ -1,1 +1,1 @@
-# Financial RAG Chatbot
+<pre> ```bash . ├── .cache/ ├── .git/ ├── data/ ├── txtfiles/ ├── graphs/ ├── models/ ├── pycache/ ├── src/ ├── scripts/ ├── services/ ├── routes/ ├── tests/ ├── app/ │ ├── templates/ │ ├── db/ │ ├── utils/ │ ├── routes/ │ └── services/ ``` </pre>

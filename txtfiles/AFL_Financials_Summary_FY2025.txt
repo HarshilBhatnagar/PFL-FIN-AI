@@ -1,0 +1,112 @@
+Axis Finance Limited - Detailed Metric and Text Summary for FY2025
+Extracted from Independent Auditors' Report and Financial Statements (March 31, 2025)
+
+1. Financial Metrics
+Balance Sheet Highlights (as at March 31, 2025):
+- Total Loan Assets (net of ECL): ₹36,75,276 lakhs
+- Allowance for Expected Credit Loss (ECL): ₹53,919 lakhs
+- Loan Assets as % of Total Assets: ~93%
+- Secured Loans: ₹31,63,146.89 lakhs (Overdue: ₹10,454.60 lakhs)
+- Unsecured Loans: ₹5,65,948.13 lakhs (Overdue: ₹2,144.36 lakhs)
+- Total Investments: ₹1,53,738.29 lakhs
+  - Current Investments: ₹13,740.48 lakhs (Government Securities)
+  - Long-Term Investments: ₹1,39,997.81 lakhs (Debentures, Bonds, Government Securities, InVIT)
+- Secured Debentures: ₹10,71,223.69 lakhs
+- Unsecured Debentures: ₹3,23,540.80 lakhs
+- Commercial Paper: Nil (Previous year: ₹1,90,851.87 lakhs)
+
+Loan Asset Classification (as at March 31, 2025):
+- Stage 3 (Credit Impaired): ₹33,205.78 lakhs
+- Stage 2 (Significant Increase in Credit Risk): ₹43,344.68 lakhs
+- Overdue Amounts (>90 days):
+  - No. of Cases: 3,507
+  - Principal Overdue: ₹33,021.83 lakhs
+  - Interest Overdue: ₹2,873.84 lakhs
+  - Total Overdue: ₹35,895.68 lakhs (excludes written-off amounts)
+
+Revenue from Insurance Commission:
+- FY2025: ₹1,748.75 lakhs
+  - Component 1: ₹1,466.86 lakhs
+  - Component 2: ₹282.89 lakhs
+- FY2024: Not fully disclosed (partial data available)
+
+Expenses in Foreign Currency (FY2024):
+- Total: ₹13.99 lakhs
+  - Component 1: ₹16.48 lakhs
+  - Component 2: ₹1.81 lakhs (Note: FY2025 data not provided)
+
+Disputed Statutory Dues:
+- Income Tax (Assessment Year 2016-17):
+  - Commissioner of Income Tax, Appeals: ₹12,95,220 (unpaid)
+  - Income Tax Appellate Tribunal (ITAT): ₹7,59,872 (unpaid)
+- Income Tax (Assessment Years 2007-08, 2010-11, 2012-13):
+  - Rectification Pending with CFC: ₹5,84,782 (unpaid)
+
+2. Audit Findings
+Auditors' Opinion:
+- Unmodified opinion issued by B. K. Khare & Co. and G. M. Kapadia & Co.
+- Financial statements comply with Ind AS, Companies Act, 2013, and provide a true and fair view of:
+  - Financial position as at March 31, 2025
+  - Profit, including Other Comprehensive Income
+  - Changes in Equity and Cash Flows for FY2025
+
+Key Audit Matters:
+1. Allowance for Expected Credit Loss (ECL):
+   - Significant judgment in classifying loans and estimating ECL (₹53,919 lakhs).
+   - Critical estimates include:
+     - Qualitative/quantitative factors for loan staging
+     - Probabilities of Default (PD), Loss Given Default (LGD), Exposure at Default (EAD)
+     - Economic scenario projections and probability weights
+     - Adjustments for emerging trends
+   - Audit approach:
+     - Evaluated accounting policies and modeling techniques
+     - Tested controls over EAD accuracy, loan staging, PD/LGD estimates
+     - Sample-based testing of ECL calculations and data completeness
+     - Reviewed management overlays for emerging trends
+2. Information Technology (IT) Systems and Controls:
+   - High dependency on automated controls for financial reporting
+   - Risks include gaps in IT general controls (user access, segregation of duties, system changes)
+   - Audit approach:
+     - Engaged IT specialists to assess IT infrastructure
+     - Tested access security, program change controls, database management
+     - Verified user access controls and application controls
+     - Assessed compensating controls for identified deficiencies
+
+Other Matters:
+- Previous year (FY2024) financials audited by Singhi & Co. and B. K. Khare & Co., with unmodified opinion (April 18, 2024).
+- Audit trail issues:
+  - Oracle software: Audit trail for vendor banking details enabled from April 16, 2024
+  - FY2024: Two softwares (including Credence, decommissioned post-September 30, 2023) lacked audit trails
+  - No evidence of audit trail tampering
+
+3. Regulatory and Compliance Disclosures
+- No pending litigations materially impacting financial position (Note 34)
+- No long-term contracts or derivative contracts with foreseeable losses
+- No amounts required for Investor Education and Protection Fund
+- No breaches of covenants or divergences in asset classification/provisioning
+- Compliance with Sections 185 and 186(1) of Companies Act, 2013
+- No benami property proceedings under Benami Transactions (Prohibition) Act, 1988
+- No declaration as willful defaulter
+- No scheme of arrangement or pending ROC filings for charges
+- Regular deposit of statutory dues (GST, income tax, provident fund, etc.), except disputed income tax dues (listed above)
+- No crypto/virtual currency trading or investment
+- No undisclosed transactions
+- Working capital limits sanctioned (>₹5 crore) align with quarterly returns submitted to banks
+
+4. Management Responsibilities
+- Board of Directors responsible for:
+  - Preparing Ind AS-compliant financial statements
+  - Maintaining adequate accounting records
+  - Safeguarding assets, preventing fraud
+  - Selecting appropriate accounting policies
+  - Ensuring effective internal financial controls
+  - Assessing going concern basis (no intent to liquidate or cease operations)
+
+5. Post-Reporting Date Events
+- No events requiring adjustments to financial statements per Ind AS 10
+
+Auditors:
+- B. K. Khare & Co. (FRN: 105102W), Shirish Rahalkar (M.No: 111212)
+- G. M. Kapadia & Co. (FRN: 104767W), Rajen Ashar (M.No: 048243)
+- Date: April 17, 2025
+- Place: Mumbai

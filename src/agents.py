@@ -4,6 +4,8 @@ from datetime import datetime
 from graph_utils import GraphGenerator
 import pandas as pd
 import re
+import json
+from langchain.schema import Document
 
 # Configure logging
 logging.basicConfig(
@@ -302,76 +304,212 @@ class GraphAgent(BaseAgent):
 
 class MasterAgent:
     def __init__(self, rag_engine):
+        """Initialize the master agent with specialized agents."""
         self.rag_engine = rag_engine
-        self.agents = [
-            QueryAgent(rag_engine),
-            GraphAgent(rag_engine)
-        ]
         self.logger = logging.getLogger("agent.master")
-        # Store last context used by QueryAgent
-        self._last_query_context = None
-        self._last_query_text = None
+        self.query_history = []
+        
+        # Initialize specialized agents
+        self.agents = {
+            "text": QueryAgent(rag_engine),
+            "graph": GraphAgent(rag_engine)
+        }
+        
+        self.logger.info(f"MasterAgent initialized with {len(self.agents)} specialized agents")
+
+    def _get_llm_agent_selection(self, query: str, context: List[Document]) -> Dict[str, float]:
+        """
+        Use LLM to determine which agent should handle the query.
+        Returns a dictionary of agent types and their confidence scores.
+        """
+        self.logger.info("Getting LLM agent selection for query: %s", query)
+        
+        # Prepare context for LLM
+        context_text = "\n".join([doc.page_content for doc in context])
+        
+        # Create prompt for LLM
+        prompt = f"""You are an expert at determining whether a query requires a graph visualization or text response.
+        Analyze the following query and context to decide which type of agent should handle it.
+
+        Query: {query}
+
+        Context:
+        {context_text}
+
+        IMPORTANT RULES:
+        1. If the query contains ANY of these words/phrases, ALWAYS choose graph agent:
+           - "show the graph"
+           - "plot"
+           - "visualize"
+           - "chart"
+           - "trend"
+           - "compare"
+           - "over time"
+           - "for the years"
+           - "between"
+           - "versus"
+           - "vs"
+           - "across"
+
+        2. If the query asks about:
+           - Trends over time
+           - Comparisons between values
+           - Visual representation of data
+           - Changes over periods
+           -> Choose graph agent
+
+        3. If the query asks for:
+           - Detailed explanations
+           - Specific values
+           - Text descriptions
+           - Individual data points
+           -> Choose text agent
+
+        Return a JSON object with confidence scores (0.0 to 1.0) for each agent type.
+        Example: {{"graph": 0.9, "text": 0.1}}
+
+        Your response:"""
+
+        try:
+            # Get response from LLM
+            response = self.rag_engine.llm.invoke(prompt)
+            self.logger.debug("LLM response for agent selection: %s", response)
+            
+            # Parse the response to get scores
+            try:
+                scores = json.loads(response)
+                # Ensure we have both scores
+                if "graph" not in scores:
+                    scores["graph"] = 0.0
+                if "text" not in scores:
+                    scores["text"] = 0.0
+                    
+                # Normalize scores
+                total = sum(scores.values())
+                if total > 0:
+                    scores = {k: v/total for k, v in scores.items()}
+                    
+                self.logger.info("LLM agent selection scores: %s", scores)
+                return scores
+                
+            except json.JSONDecodeError:
+                self.logger.error("Failed to parse LLM response as JSON: %s", response)
+                # Fallback to equal distribution
+                return {"graph": 0.5, "text": 0.5}
+                
+        except Exception as e:
+            self.logger.error("Error getting LLM agent selection: %s", str(e))
+            # Fallback to equal distribution
+            return {"graph": 0.5, "text": 0.5}
+
+    def analyze_query(self, query: str) -> Dict[str, float]:
+        """
+        Analyze the query using LLM to determine the most suitable agent.
+        """
+        self.logger.info("Starting query analysis for: %s", query)
+        
+        # Get context from RAG engine
+        self.logger.debug("Retrieving context from RAG engine")
+        context = self.rag_engine._get_relevant_context(query)
+        self.logger.info("Retrieved %d context documents", len(context))
+        
+        # Use LLM to determine agent type
+        scores = self._get_llm_agent_selection(query, context)
+        
+        self.logger.info("Final query analysis scores: %s", scores)
+        return scores
 
     def process_query(self, query: str) -> Dict[str, Any]:
         """
         Process a query through the master agent and specialized agents.
-        Returns a response with agent attribution and confidence scores.
+        Uses LLM to select the most appropriate agent.
         """
+        self.logger.info("Starting query processing: %s", query)
         start_time = datetime.now()
         input_data = {
             "query": query,
             "timestamp": datetime.now().isoformat()
         }
-        agent_responses = []
         
-        # First, determine which agent should handle the query
-        graph_agent = next((agent for agent in self.agents if agent.name == "graph"), None)
-        query_agent = next((agent for agent in self.agents if agent.name == "query"), None)
+        # Store query in history
+        self.query_history.append(query)
+        self.logger.debug("Added query to history. History size: %d", len(self.query_history))
         
-        # Check if it's a graph query first
-        if graph_agent and graph_agent.should_handle_query(query):
-            self.logger.info("Query detected as graph request")
-            response = graph_agent.process(input_data)
-            if response:
-                agent_responses.append(response)
-        # If not a graph query, use query agent
-        elif query_agent:
-            self.logger.info("Query detected as text request")
-            response = query_agent.process(input_data)
-            if response:
-                agent_responses.append(response)
-                # Store context for potential future use
-                self._last_query_context = response.get("context_used", [])
-                self._last_query_text = query
+        # Analyze query to determine best agent using LLM
+        query_scores = self.analyze_query(query)
+        best_agent_type = max(query_scores.items(), key=lambda x: x[1])[0]
         
-        final_response = self._select_best_response(agent_responses)
-        processing_time = (datetime.now() - start_time).total_seconds()
+        self.logger.info("Selected agent type: %s with confidence %.2f", 
+                        best_agent_type, query_scores[best_agent_type])
         
-        return {
-            "response": final_response["response"],
-            "agent_used": final_response["agent"],
-            "agent_type": final_response["agent_type"],
-            "confidence": final_response["confidence"],
-            "context_used": final_response.get("context_used", []),
-            "graph_data": final_response.get("graph_data", {}),
-            "embed_code": final_response.get("embed_code"),
-            "filepath": final_response.get("filepath"),
-            "processing_time": processing_time,
+        # Get the appropriate agent
+        selected_agent = self.agents.get(best_agent_type)
+        
+        if not selected_agent:
+            self.logger.warning("No agent found for type %s, falling back to QueryAgent", best_agent_type)
+            selected_agent = self.agents["text"]
+        
+        self.logger.info("Processing with agent: %s", selected_agent.name)
+        
+        # Process with selected agent
+        response = selected_agent.process(input_data)
+        
+        if not response:
+            self.logger.warning("Selected agent returned no response, trying fallback agents")
+            # Try other agents as fallback
+            for agent_type, agent in self.agents.items():
+                if agent_type != best_agent_type:
+                    self.logger.debug("Trying fallback agent: %s", agent.name)
+                    response = agent.process(input_data)
+                    if response:
+                        self.logger.info("Fallback agent %s succeeded", agent.name)
+                        break
+        
+        if not response:
+            self.logger.error("No response generated from any agent")
+            return {
+                "response": "I couldn't find a suitable response for your query.",
+                "agent_used": "master",
+                "agent_type": "fallback",
+                "confidence": 0.0,
+                "processing_time": (datetime.now() - start_time).total_seconds(),
+                "status": "error"
+            }
+        
+        # Add processing metadata
+        response.update({
+            "processing_time": (datetime.now() - start_time).total_seconds(),
+            "query_analysis": query_scores,
             "status": "success"
-        }
+        })
+        
+        self.logger.info("Query processing completed in %.2f seconds", 
+                        (datetime.now() - start_time).total_seconds())
+        return response
 
     def _select_best_response(self, responses: List[Dict[str, Any]]) -> Dict[str, Any]:
         """
-        Select the best response based on confidence scores.
-        In the future, this could be more sophisticated with ensemble methods.
+        Select the best response based on confidence scores and query analysis.
         """
+        self.logger.debug("Selecting best response from %d responses", len(responses))
+        
         if not responses:
+            self.logger.warning("No responses available for selection")
             return {
                 "agent": "master",
+                "agent_used": "master",
                 "agent_type": "fallback",
                 "confidence": 0.0,
                 "response": "I couldn't find a suitable response for your query."
             }
         
         # Sort by confidence and return the highest
-        return sorted(responses, key=lambda x: x["confidence"], reverse=True)[0] 
+        best_response = sorted(responses, key=lambda x: x["confidence"], reverse=True)[0]
+        
+        # Ensure agent_used field is present
+        if "agent_used" not in best_response:
+            best_response["agent_used"] = best_response.get("agent", "unknown")
+            
+        self.logger.info("Selected response with confidence %.2f from agent %s",
+                        best_response["confidence"], best_response["agent_used"])
+        return best_response 

@@ -1,0 +1,90 @@
+Mahindra & Mahindra Financial Services Limited Q2 FY '25 Earnings Call Summary
+Date and Time: October 22, 2024, concluded at 6:51 p.m. IST
+
+Hosted by: Axis Capital Limited
+
+Management Present:
+
+Raul Rebello, Managing Director & CEO
+Vivek Karve, Chief Financial Officer
+Sandeep Mandrekar, Chief Business Officer, Wheels
+Key Financial Highlights
+Disbursements:
+Q2 degrowth vs. Q2 FY '24; H1 FY '25 up 2% YoY, reflecting muted underlying wheels commerce.
+SME disbursements grew 50%+, while tractors (-3%), PV (-3% in Q2), CV (-1%), and three-wheelers (-1%) saw flat or negative growth. Used vehicles up 2%.
+Loan Book: Grew 20% YoY, driven by strong disbursements in FY '23 and FY '24.
+Asset Quality:
+Gross Stage 3 (GS3) at 3.8%, up 20 bps QoQ but down 50 bps YoY. 40% of GS3 increase from tractors due to delayed cash flows in agrarian states (e.g., MP, Maharashtra, Gujarat, AP, Telangana).
+GS2 + GS3 at 10.3%, expected to fall below 10% by FY '25 end.
+GNPA (IRAC norms): INR 6,000 crores (~5.3%) vs. Stage 3 INR 4,309 crores (~3.8%).
+Credit cost: H1 at 1.9%, Q2 at 2.3%, projected to end FY '25 at 1.3%-1.5%.
+End losses reduced from INR 2,500 crores (FY '22) to INR 1,700 crores (FY '24), expected to decline further.
+Provision coverage ratio (PCR) at 59.5%, expected to moderate as COVID-era data exits ECL models.
+Net Interest Margins (NIMs): Stable at 6.5%, with H1 at 6.5% and FY '25 guidance of 6.5%-6.7%.
+Yields up 30 bps QoQ (20 bps loan income, 10 bps fee income from insurance agency).
+Cost of funds unchanged, with incremental COF stable but stock-level COF slow to adjust.
+Profitability:
+PPOP up 27% YoY, PAT up 57% in Q2 and 50% in H1.
+ROA at 1.5% in H1, expected to reach 1.8%-2% by FY '25 end (vs. Mission '25 aspiration of 2.5%).
+Operating Expenses: Down to 2.6% from 2.8%, with cost-to-income ratio at ~40% (vs. 43% peak). Target range: 38%-40%.
+Capital Adequacy: CRAR down 180 bps QoQ due to dividend payout and 5.7% asset growth. Tier 1 at ~15% (vs. 9% regulatory floor), no equity raise planned in FY '25.
+Business and Operational Highlights
+Mission '25 Aspirations (Set in FY '22):
+Asset Quality: GS3 below threshold at 3.8%, credit cost trending toward 1.3%-1.5%.
+Book Growth: On track for 2x AUM from FY '22 levels, supported by prior disbursements.
+Operational Efficiency: Opex trending down, supported by digital and process improvements.
+Diversification: Non-wheels business at 6% of AUM (vs. 15% target), with MSME and leasing showing progress. Mortgage and insurance agency licenses to aid future growth.
+ROA: Targeting 2% by FY '25 end, below 2.5% aspiration.
+Festive Season (October 2024):
+Marginal improvement vs. last year, with tractors showing early signs of recovery. Awaiting Dhanteras/Diwali numbers for clearer trends.
+Digital and Tech:
+New LOS and LMS (Salesforce) implemented.
+NTC scorecards and BRE enhanced for wheels business, set to go live soon.
+Talent Augmentation:
+Mahesh (CRO, ex-HDFC/Yes Bank), Jaspreet Chadha (CBO Mortgages, ex-Bajaj Finance), Bijoy (CBO Leasing, ex-Axis Bank), Mod Singh (ex-RBI), and Devendra (Chief Analytics Officer) joined to strengthen leadership.
+Rural Housing (MRHFL):
+GS3 at ~9% (down from 12% YoY), flat QoQ. Focus on collections, not growth.
+Employee base reduced from 10,000 to 6,500. Exited low-ticket housing loans.
+Target GS3 of 5.5%-6% in 2 quarters, with Jaspreet seconded to lead stabilization.
+Segment Performance
+Tractors: 40% of GS3 spike due to delayed cash flows from late monsoons. Half-yearly repayments for agrarian borrowers impacted; monthly repayment borrowers (haulage + agri) less stressed. Recovery expected in Q3/Q4 with rabi season.
+Passenger Vehicles (PV): Flat YoY, down 3% in Q2. NTC and near-prime segments offer growth potential with improved underwriting.
+Commercial Vehicles (CV): Flat YoY, with small CVs seeing delays among self-employed borrowers.
+Used Vehicles: Up 2%, contributing 18% to disbursements. Focus on used cars, tractors, and CVs to boost yields.
+SME: Strong 50%+ growth, though small base. Key driver for diversification.
+Three-Wheelers: Down 1%, minimal overlap with MFI borrowers.
+Outlook and Priorities for FY '25 and Beyond
+Growth:
+FY '25 disbursements likely flattish or up to 4% (vs. earlier low-teen guidance). Book growth projected at ~18% due to prior disbursements.
+Medium-term (3-year) aspiration: Mid-teen disbursement CAGR, driven by wheels (maintaining market share) and new businesses (SME, leasing, mortgages).
+Margins:
+NIMs to improve to 6.5%-6.7% in FY '25 via higher IRRs (PV, used vehicles, tractors), fee income, and stable COF.
+No significant COF relief assumed.
+Asset Quality:
+Credit cost guidance: 1.3%-1.5% for FY '25, medium-term range of 1.2%-1.5%.
+Focus on controlling slippages (H1 at ~INR 1,500 crores, similar to FY '24 full year) via enhanced collections and analytics.
+GS3 and GS2 + GS3 to moderate in H2 with improved rural cash flows.
+Diversification:
+Non-wheels AUM targeted at 15%+ in the medium term, with SME, leasing, and mortgages as key drivers.
+Co-lending with SBI, Bank of Baroda, and others to target prime PV/CV customers, aiming for INR 25-40 crores monthly throughput per partner.
+Operational Efficiency:
+Cost-to-income ratio to stay at 38%-40%, balancing new business investments with fee income growth.
+Enhanced collection intensity to counter macro challenges, with analytics-driven tools and repossession efficiency reducing end losses.
+Rural Housing: Prioritize asset quality (GS3 to 5.5%-6%) over growth, with organizational rationalization ongoing.
+Q&A Key Points
+Tractor Stress: Delays, not defaults, driven by late monsoons impacting agrarian states. Recovery expected in Q3/Q4 with rabi season and aligned repayment schedules.
+Disbursement Growth: Muted due to weak underlying demand in wheels segments, not a conscious pullback. SME an outlier with strong growth.
+MFI Stress: Minimal overlap with MFI borrowers, primarily in three-wheelers, but no significant stress observed.
+Fee Income: Structural growth from insurance agency (6 partners across life, health, motor), expected to sustain and grow.
+ECL Coverage: Reviewed quarterly, with PD/LGD refresh. Coverage (59.5%) to decline in H2 as COVID-era data exits, aiding credit cost reduction.
+Slippages: Higher in H1 (~INR 1,500 crores) vs. FY '24 full year, but credit cost to moderate via recoveries and lower LGD. No artificial provision releases.
+Geographical Trends: East (Kolkata region) disbursements down 200 bps due to Northeast risk review (post-Mizoram incident) and weak market throughput.
+Capital Adequacy: No equity raise needed in FY '25, with Tier 1 at ~15%. CRAR decline due to dividend and asset growth.
+Yield Pass-Through: Steady increase in PV segment IRRs in Q1/Q2, with used vehicles aiding yield improvement. No specific quantum disclosed.
+Closing Remarks
+Q2 faced challenges from macro headwinds and rural cash flow disruptions, particularly in tractors.
+Asset quality remains a top priority, with intensified collection efforts and a war room setup akin to post-COVID.
+Growth to be balanced with margins and risk, leveraging green shoots in tractors and SME.
+Optimistic about festive season (Diwali) boosting volumes.
+Committed to achieving FY '25 targets (1.8%-2% ROA, 1.3%-1.5% credit cost, 18% book growth) while building resilience for medium-term aspirations.
+Note: The transcript aligns with regulatory filings under SEBI Listing Regulations and is available on the company’s website: Mahindra Finance Investor Relations. For further details, refer to the investor deck referenced during the call.

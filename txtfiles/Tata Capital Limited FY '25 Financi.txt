@@ -1,0 +1,63 @@
+Tata Capital Limited FY '25 Financial Results Summary
+Document Reference: financials-march-2025-signed.pdf
+
+Date: May 13, 2025
+
+Source: Audited Standalone Financial Results for the quarter and year ended March 31, 2025, submitted to BSE and NSE under SEBI Listing Regulations.
+
+Key Financial Highlights (Standalone)
+Revenue from Operations:
+Q4 FY '25: ₹5,665.97 crore (vs. ₹3,876.87 crore in Q4 FY '24, up ~46.2%).
+FY '25: ₹21,486.30 crore (vs. ₹13,289.85 crore in FY '24, up ~61.7%).
+Breakdown (FY '25):
+Interest Income: ₹19,203.46 crore (~89.4% of revenue, up 66.8% YoY).
+Fees & Commission Income: ₹1,233.81 crore (up significantly, exact YoY not provided).
+Net Gain on Fair Value Changes: ₹335.74 crore (up 89.0% YoY).
+Dividend Income: ₹85.80 crore (vs. ₹12.86 crore in FY '24).
+Total Income:
+Q4 FY '25: ₹5,955.63 crore (vs. ₹3,932.48 crore in Q4 FY '24, up ~51.4%).
+FY '25: ₹21,940.08 crore (vs. ₹13,309.11 crore in FY '24, up ~64.8%).
+Other Income: ₹53.78 crore in FY '25 (vs. ₹19.26 crore in FY '24).
+Expenses: Specific expense breakdowns (e.g., finance costs, impairment, employee benefits) not provided in the document excerpt.
+Profitability: Net profit and tax expense details not included in the provided pages.
+Assets (as at March 31, 2025):
+Total Financial Assets: ₹1,76,063.68 crore (vs. ₹1,21,686.74 crore as at March 31, 2024, up ~44.7%).
+Loans: ₹1,55,623.56 crore (up 46.2% YoY).
+Investments: ₹11,500.66 crore (up 21.2% YoY).
+Cash & Cash Equivalents: ₹6,547.82 crore (up 34.0% YoY).
+Derivative Financial Instruments: ₹795.14 crore (up 708.7% YoY).
+Non-Financial Assets:
+Deferred Tax Assets: ₹1,378.74 crore (up 229.7% YoY).
+Current Tax Assets: ₹185.75 crore (up 15.2% YoY).
+Note: The significant growth in assets and revenue reflects the amalgamation of Tata Motors Finance Limited (TMFL) into Tata Capital Limited (TCL), effective April 1, 2024.
+Key Corporate Actions
+Dividend:
+Recommended final dividend of ₹0.42 per equity share (face value ₹10) for FY '25, subject to shareholder approval at the AGM.
+Equity Issuance:
+Allotted 1,83,86,74,95 fully paid-up equity shares (₹10 each) to TMF Holdings Limited, shareholder of TMFL, pursuant to the Scheme of Arrangement effective May 8, 2025.
+Amalgamation:
+TMFL merged with TCL, effective April 1, 2024, under Sections 230-232 of the Companies Act, 2013. Assets and liabilities of TMFL recorded at fair value per Ind AS 103.
+Q3 FY '25 (Dec 31, 2024) results reflect the merged entity but are unaudited/unreviewed.
+Compliance and Disclosures
+SEBI Listing Regulations:
+Disclosures under Regulation 52(4) included with financial results.
+Security Cover Certificate provided per Regulation 54.
+Statements confirming utilization of Non-Convertible Debenture proceeds and nil deviation/variation submitted per Regulations 52(7) and 52(7A).
+Related Party Transactions disclosed for H2 FY '25 per Regulation 62K(9).
+Large Corporate Disclosures submitted per SEBI Master Circular (May 22, 2024).
+Auditors:
+Jointly audited by M S K A & Associates and M P Chitale & Co., with an unmodified opinion.
+Audit conducted per Standards on Auditing under Section 143(10) of the Companies Act, 2013.
+Emphasis of Matter: Highlighted the TMFL amalgamation, with no modification to the opinion.
+Notes and Limitations
+The document lacks specific figures for expenses, profit before tax, tax expense, and net profit, as these are not included in the provided pages.
+Q3 FY '25 (Dec 31, 2024) results are unaudited/unreviewed due to the merger, and Q4 FY '25 results are derived as a balancing figure from audited full-year and unaudited YTD figures.
+FY '24 comparative figures are pre-merger, limiting direct YoY comparability.
+Asset growth, particularly in loans and derivatives, is significantly influenced by the TMFL merger.
+Additional Context
+The amalgamation of TMFL has expanded TCL’s loan book and operational scope, likely driving the sharp increase in interest income and assets.
+The company’s focus on compliance with SEBI regulations is evident through comprehensive disclosures and auditor certifications.
+The dividend recommendation signals confidence in FY '25 performance, though the modest ₹0.42 per share reflects prudent capital management post-merger.
+For further details, refer to the complete financial results and investor disclosures on Tata Capital’s website: www.tatacapital.com or the BSE/NSE filings.
+
+Disclaimer: This summary is based on the provided document excerpts. Missing data (e.g., expenses, net profit) limits a complete financial analysis. For precise figures, consult the full audited financial statements.
