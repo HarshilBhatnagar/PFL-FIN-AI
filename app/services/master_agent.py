@@ -63,48 +63,38 @@ class MasterAgent:
 
     def _analyze_intent(self, query: str) -> Dict[str, Any]:
         """Analyze the query to determine intent and required actions."""
-        prompt = f"""You are an expert-level financial assistant designed to interpret user queries related to business and finance. Your task is to analyze the following financial query and return a clear, structured breakdown of the requirements.
- 
-Please extract and return the following information **accurately and in detail**:
- 
-1. **Primary Intent**:  
-   - Determine the main goal of the query.  
-   - Categorize the intent clearly as one of the following: 
-     - "Information Query" (the user is asking for specific data or values)
-     - "Report Request" (the user is requesting a formatted summary or detailed report)
-     - "Graph or Visualization" (the user wants the data presented visually)
-     - "Financial Analysis" (the user wants patterns, insights, or conclusions drawn from data)
-     - "Other" (if none of the above apply—explain clearly)
- 
-2. **Required Data Points and Financial Metrics**:  
-   - List **all** the metrics, dimensions, or KPIs mentioned or implied (e.g., revenue, net profit margin, YoY growth, cost center, ROI, department, region, etc.)  
-   - Be specific—do not generalize. If a user asks for “sales trends in South India,” list “sales,” “region (South India),” and “trend over time” as separate items.
- 
-3. **Time Period Referenced**:  
-   - Identify the **exact time period** requested or implied in the query (e.g., Q1 FY24, last 3 months, since Jan 2020, year-over-year, etc.)  
-   - If no time period is mentioned, write “Not specified.”
- 
-4. **Visualization Requirement**:  
-   - Determine whether the user expects or implies a **visual output**, such as a chart, graph, dashboard, or table.  
-   - Return “Yes,” “No,” or “Possibly,” and explain briefly.
- 
-5. **Type of Financial Analysis Required** (if applicable):  
-   - Identify what type of analysis is expected:  
-     - Descriptive (e.g., summary stats)
-     - Comparative (e.g., comparing regions or time periods)
-     - Trend/Time Series (e.g., over months or years)
-     - Variance (e.g., actual vs. target or budget)
-     - Forecasting
-     - Ratio Analysis
-     - Root Cause Analysis
-     - Any other — specify clearly
-   - If no analysis is required, state “None.”
- 
-Now, analyze the following user query as per the above structure, and format your output under each numbered section:
+        prompt = f"""You are a friendly and knowledgeable financial assistant, similar to ChatGPT, with expertise in analyzing business and financial queries. Your goal is to understand the user's needs and provide a helpful, structured response.
 
-Query: {query}
+Please analyze the following query in a conversational yet professional manner, focusing on:
 
-Respond in JSON format:
+1. Understanding the User's Intent:
+   - What is the user really asking for?
+   - Is it a simple question about data, a request for a report, a need for visualization, or a deeper financial analysis?
+   - Choose from: "query" (simple data question), "report" (detailed summary), "graph" (visual representation), or "analysis" (insights and patterns)
+
+2. Identifying Key Information:
+   - What specific metrics or data points are they interested in?
+   - Are there any implied comparisons or trends they want to see?
+   - List all relevant financial terms, metrics, and dimensions they mention
+
+3. Time Context:
+   - What time period are they asking about?
+   - Is there a specific date range, quarter, or year?
+   - Are they looking for historical data or current information?
+
+4. Presentation Preferences:
+   - Would a visual representation help them understand the data better?
+   - What type of visualization would be most effective?
+   - Should the response include tables or formatted text?
+
+5. Analysis Depth:
+   - What level of analysis would be most helpful?
+   - Are they looking for simple facts, comparisons, trends, or deeper insights?
+   - Should we include recommendations or just present the data?
+
+Please analyze this query: {query}
+
+Respond in a clear, structured JSON format that captures all these aspects:
 {{
     "intent": "query/report/graph/analysis",
     "data_points": ["metric1", "metric2"],
@@ -112,7 +102,9 @@ Respond in JSON format:
     "needs_visualization": true/false,
     "visualization_type": "bar/line/pie/table",
     "analysis_type": "trend/comparison/forecast"
-}}"""
+}}
+
+Remember to be thorough but concise, and focus on what would be most helpful to the user."""
 
         response = llm(
             prompt,
