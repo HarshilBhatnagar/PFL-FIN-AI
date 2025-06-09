@@ -20,6 +20,12 @@ class ChatResponse(BaseModel):
     session_id: str
     relevant_chunks: Optional[List[str]] = None
     error: Optional[str] = None
+    agent_used: str
+    agent_type: str
+    confidence: float
+    context_used: List[str]
+    processing_time: float
+    status: str
 
 @router.post("/chat")
 async def chat(request: ChatRequest):
@@ -31,8 +37,35 @@ async def chat(request: ChatRequest):
         logger.debug(f"Found {len(response)} relevant chunks")
         if not response:
             logger.warning("No relevant chunks found for query")
-            return {"query": request.query, "response": "I couldn't find any relevant information for your query. Please try a different query or check the ingested documents."}
-        return {"query": request.query, "response": response}
+            return ChatResponse(
+                answer="No relevant information found.",
+                session_id=request.session_id or "",
+                relevant_chunks=[],
+                agent_used="query",
+                agent_type="text",
+                confidence=0.0,
+                context_used=[],
+                processing_time=0.0,
+                status="ok"
+            )
+        answer = rag_engine.generate_answer(
+            query=request.query,
+            relevant_chunks=response,
+            session_id=request.session_id,
+            context=request.context
+        )
+        logger.info("Generated response successfully")
+        return ChatResponse(
+            answer=answer,
+            session_id=request.session_id or "",
+            relevant_chunks=response,
+            agent_used="query",
+            agent_type="text",
+            confidence=0.9,
+            context_used=response,
+            processing_time=0.0,
+            status="ok"
+        )
     except Exception as e:
         logger.error(f"Error processing chat request: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
@@ -48,7 +81,13 @@ async def chat(request: ChatRequest):
             return ChatResponse(
                 answer="I couldn't find any relevant information to answer your query.",
                 session_id=request.session_id or "",
-                relevant_chunks=[]
+                relevant_chunks=[],
+                agent_used="query",
+                agent_type="text",
+                confidence=0.0,
+                context_used=[],
+                processing_time=0.0,
+                status="error"
             )
         
         # Generate answer with session management
@@ -59,7 +98,17 @@ async def chat(request: ChatRequest):
             context=request.context
         )
         
-        return ChatResponse(**response)
+        return ChatResponse(
+            answer=response,
+            session_id=request.session_id or "",
+            relevant_chunks=relevant_chunks,
+            agent_used="query",
+            agent_type="text",
+            confidence=0.9,
+            context_used=relevant_chunks,
+            processing_time=0.0,
+            status="ok"
+        )
         
     except Exception as e:
         logger.error(f"Error processing chat request: {str(e)}")

@@ -64,7 +64,7 @@ class MasterAgent:
     def _analyze_intent(self, query: str) -> Dict[str, Any]:
         """Analyze the query to determine intent and required actions."""
         prompt = f"""You are a friendly and knowledgeable financial assistant, similar to ChatGPT, with expertise in analyzing business and financial queries. Your goal is to understand the user's needs and provide a helpful, structured response.
-
+ 
 Please analyze the following query in a conversational yet professional manner, focusing on:
 
 1. Understanding the User's Intent:
